@@ -26,11 +26,11 @@ function assertOutput(out, expected) {
   `);
 }
 
-{ // React functions
+{ // React component in tag name
   function Component(props) {
     return html`
       <div id='component'>
-        <span key='a'>${ props.x }|${ props.y }|${ props.z }</span>
+        <span>${ props.x }|${ props.y }|${ props.z }</span>
         ${ props.children }
       </div>
     `;
@@ -45,4 +45,20 @@ function assertOutput(out, expected) {
       <div>Test</div>
     </div>
   `);
+}
+
+{ // React component in "using" attribute
+  function Component(props) {
+    return html`
+      <span>
+        ${ props.x }|${ props.y }|${ String(props.using) }|
+        ${ props.children }
+      </span>
+    `;
+  }
+  assertOutput(html`
+    <react-component using=${Component} x=1 y=2>
+      test
+    </react-component>
+  `, '<span>1|2|undefined|test</span>');
 }
