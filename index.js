@@ -1,9 +1,9 @@
 'use strict';
 
-var quasiHtml = require('quasi-html');
+var htmlTag = require('htmltag');
 var React = require('react');
 
-function quasiHtmlReact(type, props, children) {
+function htmlTagReact(type, props, children) {
   if (typeof props.using === 'function') {
     var p = {};
     Object.keys(props).forEach(function(key) {
@@ -21,4 +21,4 @@ function quasiHtmlReact(type, props, children) {
   return React.createElement.apply(React, args);
 }
 
-module.exports = quasiHtml(quasiHtmlReact);
+module.exports = htmlTag(htmlTagReact);
